@@ -74,9 +74,9 @@
       class="text-[80px] leading-[80px] text-center mt-4 mb-6 uppercase overflow-hidden"
     >
       <div class="inline-block overflow-hidden">
-        <div class="inline-block word___letter">meet</div>
+        <div class="inline-block word___meet">meet</div>
       </div>
-      <div class="overflow-hidden block word___letter" id="mnlth">hpplt</div>
+      <div class="overflow-hidden block word___hpplt" id="hpplt">hpplt</div>
     </div>
     <button @click="gotoLinkedin()">
       <span class="z-[2]">Connect Linkedin</span>
@@ -95,12 +95,16 @@
     class="flex justify-center items-center w-full h-[calc(100%-90px)]"
   >
     <div class="text-center">
+      <img
+        src="/2212.png"
+        class="mx-0 my-auto w-[252px] h-auto mb-12 touch-pan-x image___penguin"
+      />
       <span class="text-[28px] text___mobile">Desktop only</span>
       <p
         class="mx-0 my-auto text-[#777] w-[252px] text-[16px] leading-[23px] text___mobile"
       >
-        HPPLT experience is too much to handle for your phone. Get on a PC or a
-        LINUX to Connect with HPPLT.
+        HPPLT experience is too much to handle for your phone. Get on a LINUX to
+        Connect with HPPLT.
       </p>
     </div>
   </div>
@@ -108,12 +112,20 @@
 
 <script>
 import gsap from "gsap";
+import { defineComponent } from "vue";
 
-export default {
+export default defineComponent({
   name: "App",
   data() {
     return {
-      isDesktop: window.innerWidth >= 768,
+      isDesktop:
+        !navigator.userAgent.match(/Android/i) &&
+        !navigator.userAgent.match(/webOS/i) &&
+        !navigator.userAgent.match(/iPhone/i) &&
+        !navigator.userAgent.match(/iPad/i) &&
+        !navigator.userAgent.match(/iPod/i) &&
+        !navigator.userAgent.match(/BlackBerry/i) &&
+        !navigator.userAgent.match(/Windows Phone/i),
     };
   },
   methods: {
@@ -128,10 +140,18 @@ export default {
 
     if (this.$data.isDesktop) {
       tl.to(".header__logo__wrapper", { y: "0px", duration: 0.5 })
-        .to(".word___letter", {
+        .to(".word___meet", {
           y: "0px",
           duration: 0.75,
         })
+        .to(
+          ".word___hpplt",
+          {
+            y: "0px",
+            duration: 0.75,
+          },
+          0.7
+        )
         .to("button", {
           opacity: 1,
           duration: 0.5,
@@ -141,13 +161,15 @@ export default {
           duration: 0.5,
         });
     } else {
-      tl.to(".text___mobile", {
-        opacity: 1,
-        duration: 1.25,
-      }).to(".header__logo__wrapper", { y: "0px", duration: 0.25 });
+      tl.to(".image___penguin", { opacity: 1, duration: 1 })
+        .to(".text___mobile", {
+          opacity: 1,
+          duration: 1.25,
+        })
+        .to(".header__logo__wrapper", { y: "0px", duration: 0.25 });
     }
   },
-};
+});
 </script>
 
 <style scoped>
@@ -162,11 +184,13 @@ export default {
   src: local("Sohne-Buch"), url(./assets/Sohne-Buch.otf) format("truetype");
 }
 
-.text___mobile {
+.text___mobile,
+.image___penguin {
   opacity: 0;
 }
 
-.word___letter {
+.word___meet,
+.word___hpplt {
   transform: translateY(80px);
 }
 
@@ -175,7 +199,7 @@ p span {
   transform: translateY(25px);
 }
 
-#mnlth {
+#hpplt {
   font-family: "TT_Alientz_Var_Serif", Helvetica, Arial;
 }
 
