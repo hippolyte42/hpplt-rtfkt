@@ -36,7 +36,7 @@
         </svg>
 
         <svg
-          class="h-[20.87px] overflow-hidden"
+          class="md:h-[20.87px] h-[24px] overflow-hidden"
           data-v-a9044cc0=""
           data-name="Layer 1"
           xmlns="http://www.w3.org/2000/svg"
